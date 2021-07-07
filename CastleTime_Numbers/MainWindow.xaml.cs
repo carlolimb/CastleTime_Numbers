@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LiveCharts;
+using LiveCharts.Wpf;
 
 namespace CastleTime_Numbers
 {
@@ -20,11 +22,12 @@ namespace CastleTime_Numbers
     /// </summary>
     public partial class MainWindow : Window
     {
+
         int num_attack_dice = 1;
         int num_defense_dice = 1;
 
         int e_defense = 1;
-        int e_attack = 2;
+        int e_attack = 9;
 
         int p_hp = 5;
         int e_hp = 5;
@@ -36,6 +39,7 @@ namespace CastleTime_Numbers
         {
             InitializeComponent();
 
+
             Enagage();
         }
 
@@ -43,34 +47,60 @@ namespace CastleTime_Numbers
         void Enagage()
         {
             Console.WriteLine("Engage!");
+            PieChart.Series[0].Values.Clear();
+            PieChart.Series[1].Values.Clear();
+             num_player_wins = 0;
+             num_enemy_wins = 0;
+
+
+            SeriesCollection series = new SeriesCollection
+            {
+                new ColumnSeries
+                {
+                    
+                    Values = new ChartValues<double> { 0}
+                }
+            };
+            series.Add(new ColumnSeries
+            {
+                
+                Values = new ChartValues<double> { 0 }
+            });
+
 
             for (int i = 0; i < 100; i++)
             {
-                p_hp = 5; e_hp = 5;
+                p_hp = (int)slider_player_hp.Value; 
+                e_hp = (int)slider_enemy_hp.Value;
 
-
+                int rnd = 0;
                 while (p_hp > 0 && e_hp > 0)
                 {
                     Attack_Round();
+                    rnd++;
                 }
 
-                if (p_hp == 0) num_player_wins++;
-                else num_enemy_wins++;
+                if (p_hp <= 0) { num_enemy_wins++; series[1].Values.Add((double)rnd); series[0].Values.Add((double)0); }
+                else { num_player_wins++; series[1].Values.Add((double)0); series[0].Values.Add((double)rnd); }
+
+                 
 
             }
+
+            Rounds_Chart.Series = series;
 
             Console.WriteLine("Player Wins: " + num_player_wins);
             Console.WriteLine("Enemy Wins: " + num_enemy_wins);
 
 
-
-
+            PieChart.Series[0].Values.Add((double)num_player_wins);
+            PieChart.Series[1].Values.Add((double)num_enemy_wins);
         }
 
         void Attack_Round()
         {
             Report();
-            e_attack = 2;
+            e_attack = (int)slider_enemy_attack.Value;
             int attack_value = Roll_Attack();
            
 
@@ -79,7 +109,8 @@ namespace CastleTime_Numbers
 
             int defense_value = Roll_Defense();
            
-            if (( e_attack - defense_value) > 0) { p_hp = p_hp - (e_attack - defense_value); }
+            if ( e_attack > defense_value) { p_hp = p_hp - Math.Abs(e_attack - defense_value); }
+
 
             Report();
         }
@@ -91,6 +122,8 @@ namespace CastleTime_Numbers
             Console.WriteLine();
             Console.WriteLine(" Player hp: " + p_hp);
             Console.WriteLine(" Enemy hp: " + e_hp);
+            Console.WriteLine(" Enemy Attack: " + e_attack);
+            Console.WriteLine(" Enemy Defense: " + e_defense);
         }
 
 
@@ -134,21 +167,22 @@ namespace CastleTime_Numbers
             {
                 int d = Roll_12();
                 switch (d)
-                {
-                    case 0:
+                { 
                     case 1:
                     case 2:
-                    case 3:
-                    case 4:
                         defense_value = defense_value + 2; Console.WriteLine("Defense Die: 2"); break;
+                    case 3:
+                    case 4: 
                     case 5:
                     case 6:
                     case 7:
                     case 8:
                     case 9:
+                        defense_value = defense_value + 1; Console.WriteLine("Defense Die: 1"); break;
                     case 10:
                     case 11:
-                        defense_value = defense_value + 1; Console.WriteLine("Defense Die: 1"); break;
+                    case 12:
+                         Console.WriteLine("Defense Die: 0"); break;
                 }
             }
             return defense_value;
@@ -156,7 +190,7 @@ namespace CastleTime_Numbers
 
         public int Roll_12()
         {
-            return RandomNumber(1, 12);
+            return RandomNumber(0, 13);
         }
 
         //Function to get a random number 
@@ -168,6 +202,47 @@ namespace CastleTime_Numbers
             { // synchronize
                 return random.Next(min, max);
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Enagage();
+        }
+
+        private void slider_player_hp_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            p_hp = (int)slider_player_hp.Value;
+            txt_player_hp.Text = p_hp.ToString();
+        }
+
+        private void slider_enemy_hp_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            e_hp = (int)slider_enemy_hp.Value;
+            txt_enemy_hp.Text = e_hp.ToString();
+        }
+
+        private void slider_enemy_attack_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            e_attack = (int)slider_enemy_attack.Value;
+            txt_enemy_attack.Text = e_attack.ToString();
+        }
+
+        private void slider_enemy_defense_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            e_defense = (int)slider_enemy_defense.Value;
+            txt_enemy_defense.Text = e_defense.ToString();
+        }
+
+        private void slider_player_attackdice_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            num_attack_dice = (int)slider_player_attackdice.Value;
+            txt_player_attackdice.Text = num_attack_dice.ToString();
+        }
+
+        private void slider_player_defensedice_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            num_defense_dice = (int)slider_player_defensedice.Value;
+            txt_player_defensedice.Text = num_defense_dice.ToString();
         }
     }
 }
