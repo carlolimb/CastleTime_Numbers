@@ -1,0 +1,77 @@
+﻿<Page x:Class="CastleTime_Numbers.Simulations"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CastleTime_Numbers"
+      mc:Ignorable="d" 
+      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Simulations">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40*"></RowDefinition>
+            <RowDefinition Height="70*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Vertical" >
+            <StackPanel Orientation="Horizontal">
+                <Label Margin="5" Content="Player HP:"></Label>
+                <Slider  Margin="5" x:Name="slider_player_hp" Width="75" ValueChanged="slider_player_hp_ValueChanged" ></Slider>
+                <TextBlock Margin="5" Name="txt_player_hp" IsEnabled="False"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Margin="5" Content="Enemy HP:"></Label>
+                <Slider Margin="5" x:Name="slider_enemy_hp" Width="75" ValueChanged="slider_enemy_hp_ValueChanged" ></Slider>
+                <TextBlock Margin="5" Name="txt_enemy_hp" IsEnabled="False"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Margin="5" Content="Enemy Attack:"></Label>
+                <Slider Margin="5" x:Name="slider_enemy_attack" Width="75" ValueChanged="slider_enemy_attack_ValueChanged"></Slider>
+                <TextBlock Margin="5" Name="txt_enemy_attack" IsEnabled="False"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Margin="5" Content="Enemy Defense:"></Label>
+                <Slider Margin="5" x:Name="slider_enemy_defense" Width="75" ValueChanged="slider_enemy_defense_ValueChanged"></Slider>
+                <TextBlock Margin="5" Name="txt_enemy_defense" IsEnabled="False"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Margin="5" Content="Player Attack Dice:"></Label>
+                <Slider Margin="5" x:Name="slider_player_attackdice" Width="75" ValueChanged="slider_player_attackdice_ValueChanged"></Slider>
+                <TextBlock Margin="5" Name="txt_player_attackdice" IsEnabled="False"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Margin="5" Content="Player Defense Dice:"></Label>
+                <Slider Margin="5" x:Name="slider_player_defensedice" Width="75" ValueChanged="slider_player_defensedice_ValueChanged"></Slider>
+                <TextBlock Margin="5" Name="txt_player_defensedice" IsEnabled="False"></TextBlock>
+            </StackPanel>
+            <Button Margin="10"  Content="Compute" Click="Button_Click"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" Width="75"/>
+        </StackPanel>
+
+
+        <lvc:PieChart Name="PieChart" Grid.Row="1"  LegendLocation="Bottom" Hoverable="False" DataTooltip="{x:Null}">
+            <lvc:PieChart.Series>
+                <lvc:PieSeries Name="piechart_wins" Title="Win" Values="3" DataLabels="True"
+                               />
+                <lvc:PieSeries Name="piechart_losses" Title="Loss" Values="4" DataLabels="True" 
+                               />
+            </lvc:PieChart.Series>
+        </lvc:PieChart>
+
+        <lvc:CartesianChart  Name="Rounds_Chart"  Margin="15"  Grid.Column="1" Grid.Row="1" Series="{Binding SeriesCollection}" >
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis Title="Encounters" Labels="{Binding Labels}"></lvc:Axis>
+            </lvc:CartesianChart.AxisX>
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis Title="# of Rounds" LabelFormatter="{Binding Formatter}"></lvc:Axis>
+            </lvc:CartesianChart.AxisY>
+        </lvc:CartesianChart>
+    </Grid>
+</Page>
