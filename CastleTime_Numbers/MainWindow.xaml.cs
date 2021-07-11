@@ -152,7 +152,7 @@ namespace CastleTime_Numbers
                     case 11:
                         attack_value = attack_value + 1; Console.WriteLine("Attack Die: 1"); break;
                     case 12:
-                        e_attack = e_attack + 2; break;
+                        e_attack = e_attack + 2; break;  
                 }
             }
 
