@@ -1,0 +1,34 @@
+﻿<Page x:Class="CastleTime_Numbers.Resource_Management"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CastleTime_Numbers"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Resource_Management">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30*"></ColumnDefinition>
+            <ColumnDefinition Width="70*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Border BorderThickness="1" Background="AliceBlue">
+            <!--<Canvas Width="auto" Height="auto" Name="picGrid"></Canvas>-->
+            <StackPanel Orientation="Vertical">
+                <Label Content="Dice:"></Label>
+                <StackPanel Orientation="Vertical" Margin="20,5,0,0">
+                    <CheckBox x:Name="ck_d6" Checked="ck_d6_Checked"  Content="6 sided"  ></CheckBox>
+                    <CheckBox x:Name="ck_d8" Checked="ck_d8_Checked"  Content="8 sided"></CheckBox>
+                    <CheckBox x:Name="ck_d12" IsChecked="True"  Checked="ck_d12_Checked" Content="12 sided"></CheckBox>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <Label Margin="5" Content="# of kickbacks:"></Label>
+                    <Slider Margin="7" x:Name="slider_enemy_kickback" ValueChanged="slider_enemy_kickback_ValueChanged" Width="75"></Slider>
+                    <TextBlock Margin="5" Name="txt_enemy_kickback"  IsEnabled="False"></TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

@@ -25,7 +25,7 @@ namespace CastleTime_Numbers
 
         Simulations sim_page = new Simulations();
         analysis_page analz_page = new analysis_page();
-
+        Resource_Management resource_page = new Resource_Management();
         public MainWindow()
         {
             InitializeComponent();
@@ -42,6 +42,12 @@ namespace CastleTime_Numbers
         {
             frame_lbl.Text = "Analysis";
             Main_Frame.Navigate(analz_page);
+        }
+
+        private void Image_MouseDown_2(object sender, MouseButtonEventArgs e)
+        {
+            frame_lbl.Text = "Resources";
+            Main_Frame.Navigate(resource_page);
         }
     }
 }

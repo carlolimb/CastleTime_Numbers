@@ -20,7 +20,7 @@
 
 
      
-            <StackPanel Orientation="Horizontal"> 
+            <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" Margin="0,0,636,0"> 
 
             <Image Source="/Assets/icons8-battle-50.png"  Margin="5"
                            Grid.Column="0"  
@@ -30,10 +30,12 @@ MouseDown="Image_MouseDown"
                            ></Image>
 
             <Image Source="/Assets/icons8-list-50.png" 
-                           Margin="5"                        
-MouseDown="Image_MouseDown_1"                       
-                           ></Image>
-            </StackPanel>
+                           Margin="5" MouseDown="Image_MouseDown_1" ></Image>
+                
+            <Image Source="/Assets/icons8-crowd-30.png"  Margin="5"  MouseDown="Image_MouseDown_2"  ></Image>
+
+
+        </StackPanel>
     
 
         <DockPanel Grid.Row="1"   Name="ModuleStack_Container" LastChildFill="True" HorizontalAlignment="Stretch">

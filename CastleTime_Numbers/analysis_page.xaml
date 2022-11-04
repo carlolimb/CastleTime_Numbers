@@ -43,6 +43,232 @@
             </StackPanel>
             <Button HorizontalAlignment="Center"  Margin="10"  Content="Compute" Click="Button_Click"
                 VerticalAlignment="Top" Width="75"/>
+
+            <Border BorderThickness="2">
+                <StackPanel Margin="5,20,0,0" Orientation="Vertical">
+                    <Label Content="Levels:"></Label>
+                    <Label Content="Week 1:"></Label>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="HP:"></Label>
+                                <TextBlock Margin="5" Text="5" IsEnabled="False" Name ="tb_php1"  ></TextBlock>
+                            </StackPanel>
+                            <Slider Margin="5" x:Name="slider_week1_hp" ValueChanged="week_slider_ValueChanged"  Width="50"></Slider>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="ATK:"></Label>
+                                <TextBlock Margin="5" Text="1" IsEnabled="False" Name="tb_patk1"></TextBlock>
+                            </StackPanel>
+                            <Slider Margin="5" x:Name="slider_week1_atk"  ValueChanged="week_slider_ValueChanged" Width="50"></Slider>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="DEF:"></Label>
+                                <TextBlock Margin="5" Text="1" IsEnabled="False" Name="tb_pdef1"></TextBlock>
+                            </StackPanel>
+                            <Slider Margin="5" x:Name="slider_week1_def" ValueChanged="week_slider_ValueChanged" Width="50"></Slider>
+                        </StackPanel>
+                    </StackPanel>
+                    
+                    
+                    <Label Content="Week 2:"></Label>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="HP:"></Label>
+                                <TextBlock Margin="5" Text="5" IsEnabled="False" Name ="tb_php2"  ></TextBlock>
+                            </StackPanel>
+                            <Slider Margin="5" x:Name="slider_week2_hp" ValueChanged="week_slider_ValueChanged"  Width="50"></Slider>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="ATK:"></Label>
+                                <TextBlock Margin="5" Text="3" IsEnabled="False" Name="tb_patk2"></TextBlock>
+                            </StackPanel>
+                            <Slider Margin="5" x:Name="slider_week2_atk"  ValueChanged="week_slider_ValueChanged" Width="50"></Slider>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="DEF:"></Label>
+                                <TextBlock Margin="5" Text="3" IsEnabled="False" Name="tb_pdef2"></TextBlock>
+                            </StackPanel>
+                            <Slider Margin="5" x:Name="slider_week2_def" ValueChanged="week_slider_ValueChanged" Width="50"></Slider>
+                        </StackPanel>
+                    </StackPanel>
+
+
+
+
+                    <Label Content="Week 3:"></Label>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="HP:"></Label>
+                                <TextBlock Margin="5" Text="5" IsEnabled="False" Name ="tb_php3"  ></TextBlock>
+                            </StackPanel>
+                            <Slider Margin="5" x:Name="slider_week3_hp" ValueChanged="week_slider_ValueChanged"  Width="50"></Slider>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="ATK:"></Label>
+                                <TextBlock Margin="5" Text="5" IsEnabled="False" Name="tb_patk3"></TextBlock>
+                            </StackPanel>
+                            <Slider Margin="5" x:Name="slider_week3_atk"  ValueChanged="week_slider_ValueChanged" Width="50"></Slider>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="DEF:"></Label>
+                                <TextBlock Margin="5" Text="5" IsEnabled="False" Name="tb_pdef3"></TextBlock>
+                            </StackPanel>
+                            <Slider Margin="5" x:Name="slider_week3_def" ValueChanged="week_slider_ValueChanged" Width="50"></Slider>
+                        </StackPanel>
+                    </StackPanel>
+                    
+                    <Label Content="Week 4:"></Label>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="HP:"></Label>
+                                <TextBlock Margin="5" Text="5" IsEnabled="False" Name ="tb_php4"  ></TextBlock>
+                            </StackPanel>
+                            <Slider Margin="5" x:Name="slider_week4_hp" ValueChanged="week_slider_ValueChanged"  Width="50"></Slider>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="ATK:"></Label>
+                                <TextBlock Margin="5" Text="6" IsEnabled="False" Name="tb_patk4"></TextBlock>
+                            </StackPanel>
+                            <Slider Margin="5" x:Name="slider_week4_atk"  ValueChanged="week_slider_ValueChanged" Width="50"></Slider>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="DEF:"></Label>
+                                <TextBlock Margin="5" Text="6" IsEnabled="False" Name="tb_pdef4"></TextBlock>
+                            </StackPanel>
+                            <Slider Margin="5" x:Name="slider_week4_def" ValueChanged="week_slider_ValueChanged" Width="50"></Slider>
+                        </StackPanel>
+                    </StackPanel>
+                    
+                    
+                    <Label Content="Week 5:"></Label>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="HP:"></Label>
+                                <TextBlock Margin="5" Text="7" IsEnabled="False" Name ="tb_php5"  ></TextBlock>
+                            </StackPanel>
+                            <Slider Margin="5" x:Name="slider_week5_hp" ValueChanged="week_slider_ValueChanged"  Width="50"></Slider>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="ATK:"></Label>
+                                <TextBlock Margin="5" Text="7" IsEnabled="False" Name="tb_patk5"></TextBlock>
+                            </StackPanel>
+                            <Slider Margin="5" x:Name="slider_week5_atk"  ValueChanged="week_slider_ValueChanged" Width="50"></Slider>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="DEF:"></Label>
+                                <TextBlock Margin="5" Text="7" IsEnabled="False" Name="tb_pdef5"></TextBlock>
+                            </StackPanel>
+                            <Slider Margin="5" x:Name="slider_week5_def" ValueChanged="week_slider_ValueChanged" Width="50"></Slider>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <Label Content="Week 6:"></Label>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="HP:"></Label>
+                                <TextBlock Margin="5" Text="5" IsEnabled="False" Name ="tb_php6"  ></TextBlock>
+                            </StackPanel>
+                            <Slider Margin="5" x:Name="slider_week6_hp" ValueChanged="week_slider_ValueChanged"  Width="50"></Slider>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="ATK:"></Label>
+                                <TextBlock Margin="5" Text="8" IsEnabled="False" Name="tb_patk6"></TextBlock>
+                            </StackPanel>
+                            <Slider Margin="5" x:Name="slider_week6_atk"  ValueChanged="week_slider_ValueChanged" Width="50"></Slider>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="DEF:"></Label>
+                                <TextBlock Margin="5" Text="8" IsEnabled="False" Name="tb_pdef6"></TextBlock>
+                            </StackPanel>
+                            <Slider Margin="5" x:Name="slider_week6_def" ValueChanged="week_slider_ValueChanged" Width="50"></Slider>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <Label Content="Week 7:"></Label>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="HP:"></Label>
+                                <TextBlock Margin="5" Text="5" IsEnabled="False" Name ="tb_php7"  ></TextBlock>
+                            </StackPanel>
+                            <Slider Margin="5" x:Name="slider_week7_hp" ValueChanged="week_slider_ValueChanged"  Width="50"></Slider>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="ATK:"></Label>
+                                <TextBlock Margin="5" Text="9" IsEnabled="False" Name="tb_patk7"></TextBlock>
+                            </StackPanel>
+                            <Slider Margin="5" x:Name="slider_week7_atk"  ValueChanged="week_slider_ValueChanged" Width="50"></Slider>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="DEF:"></Label>
+                                <TextBlock Margin="5" Text="9" IsEnabled="False" Name="tb_pdef7"></TextBlock>
+                            </StackPanel>
+                            <Slider Margin="5" x:Name="slider_week7_def" ValueChanged="week_slider_ValueChanged" Width="50"></Slider>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <Label Content="Week 8:"></Label>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="HP:"></Label>
+                                <TextBlock Margin="5" Text="5" IsEnabled="False" Name ="tb_php8"  ></TextBlock>
+                            </StackPanel>
+                            <Slider Margin="5" x:Name="slider_week8_hp" ValueChanged="week_slider_ValueChanged"  Width="50" ></Slider>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="ATK:"></Label>
+                                <TextBlock Margin="5" Text="10" IsEnabled="False" Name="tb_patk8"></TextBlock>
+                            </StackPanel>
+                            <Slider Margin="5" x:Name="slider_week8_atk"  ValueChanged="week_slider_ValueChanged" Width="50"></Slider>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="DEF:"></Label>
+                                <TextBlock Margin="5" Text="10" IsEnabled="False" Name="tb_pdef8"></TextBlock>
+                            </StackPanel>
+                            <Slider Margin="5" x:Name="slider_week8_def" ValueChanged="week_slider_ValueChanged" Width="50"></Slider>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
         </StackPanel>
 
 
@@ -51,17 +277,32 @@
                 <ColumnDefinition Width="50*"></ColumnDefinition>
                 <ColumnDefinition Width="50*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            
-            <lvc:CartesianChart  Name="Analz_Chart"  Margin="15"    Series="{Binding SeriesCollection}" >
-            <lvc:CartesianChart.AxisX>
-                <lvc:Axis Title="Levels" Labels="{Binding Labels}"></lvc:Axis>
-            </lvc:CartesianChart.AxisX>
-            <lvc:CartesianChart.AxisY>
-                <lvc:Axis Title="Probability of Success" MaxValue="1" MinValue="0"  LabelFormatter="{Binding Formatter}"></lvc:Axis>
-            </lvc:CartesianChart.AxisY>
-        </lvc:CartesianChart>
-            
-            <lvc:CartesianChart  Name="Rounds_Chart"  Margin="15"  Grid.Column="1" Grid.Row="1" Series="{Binding SeriesCollection}" >
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+
+            <lvc:CartesianChart Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" Name="PowerCurve_Chart"  Margin="15"    Series="{Binding SeriesCollection}" >
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="Levels" Labels="{Binding Labels}"></lvc:Axis>
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="% winning the Game" MaxValue="1" MinValue="0"  LabelFormatter="{Binding Formatter}"></lvc:Axis>
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
+
+
+            <lvc:CartesianChart Grid.Row="1" Name="Analz_Chart"  Margin="15"    Series="{Binding SeriesCollection}" >
+                <lvc:CartesianChart.AxisX>
+                    <lvc:Axis Title="Levels" Labels="{Binding Labels}"></lvc:Axis>
+                </lvc:CartesianChart.AxisX>
+                <lvc:CartesianChart.AxisY>
+                    <lvc:Axis Title="Probability of Success" MaxValue="1" MinValue="0"  LabelFormatter="{Binding Formatter}"></lvc:Axis>
+                </lvc:CartesianChart.AxisY>
+            </lvc:CartesianChart>
+
+            <lvc:CartesianChart Grid.Row="1" Name="Rounds_Chart"  Margin="15"  Grid.Column="1"  Series="{Binding SeriesCollection}" >
                 <lvc:CartesianChart.AxisX>
                     <lvc:Axis Title="Levels" Labels="{Binding Labels}"></lvc:Axis>
                 </lvc:CartesianChart.AxisX>

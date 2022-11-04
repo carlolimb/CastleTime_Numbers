@@ -82,16 +82,12 @@ namespace CastleTime_Numbers
 
                 if (p_hp <= 0) { num_enemy_wins++; series[1].Values.Add((double)rnd); series[0].Values.Add((double)0); }
                 else { num_player_wins++; series[1].Values.Add((double)0); series[0].Values.Add((double)rnd); }
-
-
-
             }
 
             Rounds_Chart.Series = series;
 
             Console.WriteLine("Player Wins: " + num_player_wins);
             Console.WriteLine("Enemy Wins: " + num_enemy_wins);
-
 
             PieChart.Series[0].Values.Add((double)num_player_wins);
             PieChart.Series[1].Values.Add((double)num_enemy_wins);
@@ -141,24 +137,25 @@ namespace CastleTime_Numbers
         }
 
 
-       void Attack_Round() { 
+       void Attack_Round() {
 
-            Report();
+            //Report();
 
-            int attack_value = Roll_Attack();
+            (int,int) x = Combat_Engine.Roll_Attack(num_attack_dice, e_attack);
+            int attack_value = x.Item1;
+            e_attack = x.Item2;
 
 
             if ((attack_value - e_defense) > 0) { e_hp = e_hp - (attack_value - e_defense); }
 
 
-            int defense_value = Roll_Defense();
-
+            int defense_value = Combat_Engine.Roll_Defense(num_defense_dice);
+                
             if (e_attack > defense_value) { p_hp = p_hp - Math.Abs(e_attack - defense_value); }
 
 
-            Report();
+            //Report();
         }
-
 
 
          public void Report()
@@ -171,83 +168,7 @@ namespace CastleTime_Numbers
         }
 
 
-         public int Roll_Attack()
-        {
-            int attack_value = 0;
-            for (int i = 0; i < num_attack_dice; i++)
-            {
-                int d = Roll_12();
-                switch (d)
-                {
-                    case 1:
-                        attack_value = attack_value + 3;
-                        Console.WriteLine("Attack Die: 3");
-                        break;
-                    case 2:
-                    case 3:
-                    case 4:
-                        attack_value = attack_value + 2; Console.WriteLine("Attack Die: 2"); break;
-                    case 5:
-                    case 6:
-                    case 7:
-                    case 8:
-                    case 9:
-                    case 10:
-                    case 11:
-                        attack_value = attack_value + 1; Console.WriteLine("Attack Die: 1"); break;
-                    case 12:
-                        e_attack = e_attack + 2; break;
-                }
-            }
-
-            return attack_value;
-
-        }
-
-         public int Roll_Defense()
-        {
-            int defense_value = 0;
-            for (int i = 0; i < num_defense_dice; i++)
-            {
-                int d = Roll_12();
-                switch (d)
-                {
-                    case 1:
-                    case 2:
-                        defense_value = defense_value + 2; Console.WriteLine("Defense Die: 2"); break;
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                    case 7:
-                    case 8:
-                    case 9:
-                        defense_value = defense_value + 1; Console.WriteLine("Defense Die: 1"); break;
-                    case 10:
-                    case 11:
-                    case 12:
-                        Console.WriteLine("Defense Die: 0"); break;
-                }
-            }
-            return defense_value;
-        }
-
-         public int Roll_12()
-        {
-            return RandomNumber(0, 13);
-        }
-
-        //Function to get a random number 
-        private static readonly Random random = new Random();
-        private static readonly object syncLock = new object();
-        public static int RandomNumber(int min, int max)
-        {
-            lock (syncLock)
-            { // synchronize
-                return random.Next(min, max);
-            }
-        }
-
+         
 
 
 

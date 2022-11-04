@@ -69,30 +69,61 @@ namespace CastleTime_Numbers
                 }
             };
 
+            SeriesCollection Power_series = new SeriesCollection
+            {
+                new ColumnSeries
+                {
 
-            for (int lvl = 1; lvl < 7; lvl++)
+                    //Values = new ChartValues<double> { 0}
+                }
+            };
+
+
+            for (int lvl = 1; lvl < 9; lvl++)
             {
                 num_player_wins = 0; num_enemy_wins = 0;
                 int rnd = 0;
                 switch (lvl)
                 {
                     case 1:
-                        default_p_hp = 2; num_attack_dice = 1; num_defense_dice = 1;
+                        default_p_hp = Convert.ToInt16(tb_php1.Text); 
+                        num_attack_dice = Convert.ToInt16(tb_patk1.Text); 
+                        num_defense_dice = Convert.ToInt16(tb_pdef1.Text);
                         break;
                     case 2:
-                        default_p_hp = 4; num_attack_dice = 1; num_defense_dice = 2;
+                        default_p_hp = Convert.ToInt16(tb_php2.Text);
+                        num_attack_dice = Convert.ToInt16(tb_patk2.Text);
+                        num_defense_dice = Convert.ToInt16(tb_pdef2.Text);
                         break;
                     case 3:
-                        default_p_hp = 6; num_attack_dice = 2; num_defense_dice = 2;
+                        default_p_hp = Convert.ToInt16(tb_php3.Text);
+                        num_attack_dice = Convert.ToInt16(tb_patk3.Text);
+                        num_defense_dice = Convert.ToInt16(tb_pdef3.Text);
                         break;
                     case 4:
-                        default_p_hp = 8; num_attack_dice = 2; num_defense_dice = 3;
+                        default_p_hp = Convert.ToInt16(tb_php4.Text);
+                        num_attack_dice = Convert.ToInt16(tb_patk4.Text);
+                        num_defense_dice = Convert.ToInt16(tb_pdef4.Text);
                         break;
                     case 5:
-                        default_p_hp = 10; num_attack_dice = 3; num_defense_dice = 3;
+                        default_p_hp = Convert.ToInt16(tb_php5.Text);
+                        num_attack_dice = Convert.ToInt16(tb_patk5.Text);
+                        num_defense_dice = Convert.ToInt16(tb_pdef5.Text);
                         break;
                     case 6:
-                        default_p_hp = 12; num_attack_dice = 4; num_defense_dice = 3;
+                        default_p_hp = Convert.ToInt16(tb_php6.Text);
+                        num_attack_dice = Convert.ToInt16(tb_patk6.Text);
+                        num_defense_dice = Convert.ToInt16(tb_pdef6.Text);
+                        break;
+                    case 7:
+                        default_p_hp = Convert.ToInt16(tb_php7.Text);
+                        num_attack_dice = Convert.ToInt16(tb_patk7.Text);
+                        num_defense_dice = Convert.ToInt16(tb_pdef7.Text);
+                        break;
+                    case 8:
+                        default_p_hp = Convert.ToInt16(tb_php8.Text);
+                        num_attack_dice = Convert.ToInt16(tb_patk8.Text);
+                        num_defense_dice = Convert.ToInt16(tb_pdef8.Text);
                         break;
                 }
 
@@ -101,7 +132,7 @@ namespace CastleTime_Numbers
                     e_hp = (int)slider_enemy_hp.Value;
                     default_e_attack = (int)slider_enemy_attack.Value;
                     p_hp = default_p_hp;
-                    
+
                     while (p_hp > 0 && e_hp > 0)
                     {
                         Attack_Round();
@@ -113,15 +144,13 @@ namespace CastleTime_Numbers
 
                 }
                 double chance = (double)num_player_wins / (double)num_simulations;
-                Console.WriteLine("Player level " + lvl + " Player wins: "+ num_player_wins + " Chance: " + chance);
-
-               
+                Console.WriteLine("Player level+++ " + lvl + " Player wins: " + num_player_wins + " Chance: " + chance);
 
                 if (series[0].Values == null) series[0].Values = new ChartValues<double> { chance };
 
                 else series[0].Values.Add(chance);
 
-                if (rnd_series[0].Values == null) rnd_series[0].Values = new ChartValues<double> { rnd/num_simulations };
+                if (rnd_series[0].Values == null) rnd_series[0].Values = new ChartValues<double> { rnd / num_simulations };
 
                 else rnd_series[0].Values.Add((double)rnd / num_simulations);
 
@@ -132,7 +161,8 @@ namespace CastleTime_Numbers
             Rounds_Chart.Series = rnd_series;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+            private void Button_Click(object sender, RoutedEventArgs e)
         {
             Engage_Level_Analysis();
         }
@@ -167,18 +197,20 @@ namespace CastleTime_Numbers
             txt_num_players.Text = num_players.ToString();
         }
 
-        void Attack_Round() 
+        void Attack_Round()
         {
             e_attack = default_e_attack;
 
             Report();
 
-            int attack_value = Roll_Attack();
+            (int, int) x = Combat_Engine.Roll_Attack(num_attack_dice, e_attack,e_kickback);
+            int attack_value = x.Item1;
+            e_attack = x.Item2;
 
 
             if ((attack_value - e_defense) > 0) { e_hp = e_hp - (attack_value - e_defense); }
 
-            int defense_value = Roll_Defense();
+            int defense_value = Combat_Engine.Roll_Defense(num_defense_dice);
 
             if (e_attack > defense_value) { p_hp = p_hp - Math.Abs(e_attack - defense_value); }
 
@@ -188,7 +220,7 @@ namespace CastleTime_Numbers
 
 
 
-         public void Report()
+        public void Report()
         {
             //Console.WriteLine();
             //Console.WriteLine(" Player hp: " + p_hp);
@@ -197,93 +229,130 @@ namespace CastleTime_Numbers
             //Console.WriteLine(" Enemy Defense: " + e_defense);
         }
 
-
-         public int Roll_Attack()
+        private void week_slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            int attack_value = 0;
-            for (int i = 0; i < num_attack_dice*num_players; i++)
+            
+            if (e.Source.Equals(slider_week1_hp))
             {
-                int d = Roll_12();
-                switch (d)
-                {
-                    case 1:
-                    case 2:
-                        attack_value = attack_value + 3;
-                        //Console.WriteLine("Attack Die: 3");
-                        break;
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                        attack_value = attack_value + 2;
-                        //Console.WriteLine("Attack Die: 2"); 
-                        break;
-                    case 7:
-                    case 8:
-                    case 9:
-                    case 10:
-                    case 11:
-                        attack_value = attack_value + 1; 
-                        //Console.WriteLine("Attack Die: 1");
-                        break;
-                    case 12:
-                        e_attack = e_attack + e_kickback; break;
-                }
+                tb_php1.Text = ((int)e.NewValue).ToString();
+
             }
-
-            return attack_value;
-
-        }
-
-         public int Roll_Defense()
-        {
-            int defense_value = 0;
-            for (int i = 0; i < num_defense_dice * num_players; i++)
+            if (e.Source.Equals(slider_week1_atk))
             {
-                int d = Roll_12();
-                switch (d)
-                {
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                        defense_value = defense_value + 2;
-                        //Console.WriteLine("Defense Die: 2"); 
-                        break;
-                    case 7:
-                    case 8:
-                    case 9:
-                    case 10:
-                    case 11:
-                        defense_value = defense_value + 1; 
-                        //Console.WriteLine("Defense Die: 1");
-                        break;
-                    case 12:
-                        //Console.WriteLine("Defense Die: 0"); 
-                        break;
-                }
+                tb_patk1.Text = ((int)e.NewValue).ToString();
+
             }
-            return defense_value;
-        }
+            if (e.Source.Equals(slider_week1_def))
+            {
+                tb_pdef1.Text = ((int)e.NewValue).ToString();
 
-         public int Roll_12()
-        {
-            return RandomNumber(0, 13);
-        }
-
-        //Function to get a random number 
-        private static readonly Random random = new Random();
-        private static readonly object syncLock = new object();
-        public static int RandomNumber(int min, int max)
-        {
-            lock (syncLock)
-            { // synchronize
-                return random.Next(min, max);
             }
-        }
+            if (e.Source.Equals(slider_week2_hp))
+            {
+                tb_php2.Text = ((int)e.NewValue).ToString();
 
-        
+            }
+            if (e.Source.Equals(slider_week2_atk))
+            {
+                tb_patk2.Text = ((int)e.NewValue).ToString();
+
+            }
+            if (e.Source.Equals(slider_week2_def))
+            {
+                tb_pdef2.Text = ((int)e.NewValue).ToString();
+
+            }
+            if (e.Source.Equals(slider_week3_hp))
+            {
+                tb_php3.Text = ((int)e.NewValue).ToString();
+
+            }
+            if (e.Source.Equals(slider_week3_atk))
+            {
+                tb_patk3.Text = ((int)e.NewValue).ToString();
+
+            }
+            if (e.Source.Equals(slider_week3_def))
+            {
+                tb_pdef3.Text = ((int)e.NewValue).ToString();
+
+            }
+            if (e.Source.Equals(slider_week4_hp))
+            {
+                tb_php4.Text = ((int)e.NewValue).ToString();
+
+            }
+            if (e.Source.Equals(slider_week4_atk))
+            {
+                tb_patk4.Text = ((int)e.NewValue).ToString();
+
+            }
+            if (e.Source.Equals(slider_week4_def))
+            {
+                tb_pdef4.Text = ((int)e.NewValue).ToString();
+
+            }
+            if (e.Source.Equals(slider_week5_hp))
+            {
+                tb_php5.Text = ((int)e.NewValue).ToString();
+
+            }
+            if (e.Source.Equals(slider_week5_atk))
+            {
+                tb_patk5.Text = ((int)e.NewValue).ToString();
+
+            }
+            if (e.Source.Equals(slider_week5_def))
+            {
+                tb_pdef5.Text = ((int)e.NewValue).ToString();
+
+            }
+            if (e.Source.Equals(slider_week6_hp))
+            {
+                tb_php6.Text = ((int)e.NewValue).ToString();
+
+            }
+            if (e.Source.Equals(slider_week6_atk))
+            {
+                tb_patk6.Text = ((int)e.NewValue).ToString();
+
+            }
+            if (e.Source.Equals(slider_week6_def))
+            {
+                tb_pdef6.Text = ((int)e.NewValue).ToString();
+
+            }
+            if (e.Source.Equals(slider_week7_hp))
+            {
+                tb_php7.Text = ((int)e.NewValue).ToString();
+
+            }
+            if (e.Source.Equals(slider_week7_atk))
+            {
+                tb_patk7.Text = ((int)e.NewValue).ToString();
+
+            }
+            if (e.Source.Equals(slider_week7_def))
+            {
+                tb_pdef7.Text = ((int)e.NewValue).ToString();
+
+            }
+            if (e.Source.Equals(slider_week8_hp))
+            {
+                tb_php8.Text = ((int)e.NewValue).ToString();
+
+            }
+            if (e.Source.Equals(slider_week8_atk))
+            {
+                tb_patk8.Text = ((int)e.NewValue).ToString();
+
+            }
+            if (e.Source.Equals(slider_week8_def))
+            {
+                tb_pdef8.Text = ((int)e.NewValue).ToString();
+
+            }
+
+        }
     }
 }
